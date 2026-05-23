@@ -117,12 +117,13 @@ STATS_TEMPLATE = (
 )
 
 # ── Welcome message admin strings ─────────────────────────────────────────────
-WELCOME_MSG_PANEL = (
+WELCOME_MSG_PANEL_TOP = (
     "✏️ <b>Edit Welcome Message</b>\n\n"
     "<b>Current message:</b>\n"
     "┌─────────────────\n"
-    "{current}\n"
-    "└─────────────────\n\n"
+)
+WELCOME_MSG_PANEL_BOTTOM = (
+    "\n└─────────────────\n\n"
     "<b>Available placeholders:</b>\n"
     "• <code>{first_name}</code> – user's first name\n"
     "• <code>{last_name}</code>  – user's last name\n"
@@ -143,12 +144,13 @@ WELCOME_MSG_INSTRUCTIONS = (
     "<code>🎉 Welcome, {first_name}! You're now verified.</code>"
 )
 
-WELCOME_MSG_PREVIEW = (
+WELCOME_MSG_PREVIEW_TOP = (
     "👁 <b>Preview Welcome Message</b>\n\n"
     "This is how it will look to a user:\n\n"
     "┌─────────────────\n"
-    "{preview}\n"
-    "└─────────────────\n\n"
+)
+WELCOME_MSG_PREVIEW_BOTTOM = (
+    "\n└─────────────────\n\n"
     "Save this as the new welcome message?"
 )
 
