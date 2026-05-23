@@ -385,8 +385,10 @@ async def callback_welcome_msg(call: CallbackQuery, state: FSMContext) -> None:
         messages.WELCOME_MSG_SETTING_KEY,
         default=messages.DEFAULT_WELCOME_MESSAGE,
     )
+    # Use concatenation — current may contain {placeholders} that would crash .format()
+    panel_text = messages.WELCOME_MSG_PANEL_TOP + current + messages.WELCOME_MSG_PANEL_BOTTOM
     await call.message.edit_text(
-        messages.WELCOME_MSG_PANEL.format(current=current),
+        panel_text,
         reply_markup=keyboards.welcome_msg_kb(),
         parse_mode="HTML",
     )
@@ -420,8 +422,10 @@ async def process_welcome_msg(message: Message, state: FSMContext) -> None:
     await state.update_data(welcome_msg_draft=new_msg)
     await state.set_state(None)  # clear FSM state but keep data
 
+    # Use concatenation — preview may contain {placeholders} that would crash .format()
+    preview_text = messages.WELCOME_MSG_PREVIEW_TOP + preview + messages.WELCOME_MSG_PREVIEW_BOTTOM
     await message.answer(
-        messages.WELCOME_MSG_PREVIEW.format(preview=preview),
+        preview_text,
         reply_markup=keyboards.confirm_welcome_msg_kb(),
         parse_mode="HTML",
     )
@@ -456,8 +460,9 @@ async def callback_wm_preview(call: CallbackQuery) -> None:
         default=messages.DEFAULT_WELCOME_MESSAGE,
     )
     preview = _render_preview(current, name=call.from_user.first_name)
+    preview_text = messages.WELCOME_MSG_PREVIEW_TOP + preview + messages.WELCOME_MSG_PREVIEW_BOTTOM
     await call.message.edit_text(
-        messages.WELCOME_MSG_PREVIEW.format(preview=preview),
+        preview_text,
         reply_markup=keyboards.welcome_msg_kb(),
         parse_mode="HTML",
     )
